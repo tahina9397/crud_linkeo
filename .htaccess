@@ -1,0 +1,21 @@
+<IfModule mod_rewrite.c>
+# Remove the line below on error 500
+RewriteEngine On
+
+#RewriteCond %{HTTPS} off
+#RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Rewrite rules
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l
+RewriteRule ^.*$ - [NC,L]
+RewriteRule ^.*$ index.php [NC,L]
+</IfModule>
+
+# Do not show phtml view files
+<filesMatch "\.(phtml)$">
+Deny from All
+</filesMatch>
+
+# AddType application/x-httpd-php .php
+SetEnv APPLICATION_ENV development
